@@ -1,0 +1,13 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.bimromatic.mvvm_practical////PointingToDeclaration/app/com.bimromatic.mvvm_practical/index.html
+$dokka.location:com.bimromatic.mvvm_practical/App///PointingToDeclaration/app/com.bimromatic.mvvm_practical/-app/index.html
+$dokka.location:com.bimromatic.mvvm_practical/App/App/#/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-app/-app.html
+$dokka.location:com.bimromatic.mvvm_practical/App/onCreate/#/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-app/on-create.html
+$dokka.location:com.bimromatic.mvvm_practical/App/onTerminate/#/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-app/on-terminate.html
+$dokka.location:com.bimromatic.mvvm_practical/App/onTrimMemory/#kotlin.Int/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-app/on-trim-memory.html
+$dokka.location:com.bimromatic.mvvm_practical/MainActivity///PointingToDeclaration/app/com.bimromatic.mvvm_practical/-main-activity/index.html
+$dokka.location:com.bimromatic.mvvm_practical/MainActivity/MainActivity/#/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-main-activity/-main-activity.html
+$dokka.location:com.bimromatic.mvvm_practical/MainActivity/onCreate/#android.os.Bundle?/PointingToDeclaration/app/com.bimromatic.mvvm_practical/-main-activity/on-create.html
+com.bimromatic.mvvm_practical
+

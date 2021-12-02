@@ -1,0 +1,35 @@
+allprojects {
+    repositories {
+        //阿里新老仓库更换对比 todo https://maven.aliyun.com/mvn/guide
+        google()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+}
+
+subprojects { subproject ->
+    printf "===>${subproject.name}"
+    // 应用所有子项目中
+    apply plugin: 'com.bimromatic.version.plugin'
+    // 如果想应用到某个子项目中，可以通过 subproject.name 来判断应用在哪个子项目中
+    // subproject.name 是你子项目的名字
+    // 官方文档地址：https://guides.gradle.org/creating-multi-project-builds/#add_documentation
+    if (subproject.name == "app") {
+        apply plugin: 'com.android.application'
+        apply plugin: 'kotlin-android'
+        apply plugin: 'org.jetbrains.dokka'
+    }
+}
+
+
+//Gradle编译设置编码格式
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.addStringOption('encoding', 'UTF-8')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
