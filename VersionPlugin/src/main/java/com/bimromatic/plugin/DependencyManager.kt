@@ -179,16 +179,16 @@ object Dependencies {
 //    val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 //    val gradle_plugin = "com.android.tools.build:gradle:${Versions.gradle}"
 
-    val addRepos: (handler: RepositoryHandler) -> Unit = {
-        it.google()
-        it.maven { it.url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
-        it.maven { it.url = URI("https://jitpack.io") }
-        it.maven { it.url = URI("https://repo1.maven.org/maven2/") }
-        it.maven { it.url = URI("https://s01.oss.sonatype.org/content/groups/public") }
-        it.maven { it.url = URI("https://maven.aliyun.com/repository/central") }
-        it.maven { it.url = URI("https://maven.aliyun.com/repository/jcenter") }
-        it.maven { it.url = URI("https://maven.aliyun.com/repository/google") }
-        it.maven { it.url = URI("https://maven.aliyun.com/repository/gradle-plugin") }
-        it.maven { it.url = URI("https://maven.aliyun.com/repository/public") }
-    }
+//    val addRepos: (handler: RepositoryHandler) -> Unit = {
+//        it.google()
+//        it.maven { it.url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
+//        it.maven { it.url = URI("https://jitpack.io") }
+//        it.maven { it.url = URI("https://repo1.maven.org/maven2/") }
+//        it.maven { it.url = URI("https://s01.oss.sonatype.org/content/groups/public") }
+//        it.maven { it.url = URI("https://maven.aliyun.com/repository/central") }
+//        it.maven { it.url = URI("https://maven.aliyun.com/repository/jcenter") }
+//        it.maven { it.url = URI("https://maven.aliyun.com/repository/google") }
+//        it.maven { it.url = URI("https://maven.aliyun.com/repository/gradle-plugin") }
+//        it.maven { it.url = URI("https://maven.aliyun.com/repository/public") }
+//    }
 }

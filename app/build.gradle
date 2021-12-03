@@ -35,6 +35,9 @@ android {
 }
 
 dependencies {
+
+   //api rootProject.ext.dependencies["retrofit"]
+
     implementation AndroidX.CoreKtx
     implementation AndroidX.AppCompat
     implementation UIMaterial.Material
@@ -76,3 +79,22 @@ dokkaHtml.configure {
         }
     }
 }
+
+
+//def implementationDependencies = project.ext.dependencies
+//def processors = project.ext.annotationProcesso
+//def implementationExcludes = project.ext.implementationExcludes
+//dependencies {
+//    // 处理所有的 xxximplementation 依赖
+//    implementationDependencies.each { k, v -> implementation v }
+//    // 处理 annotationProcessor 依赖
+//    processors.each { k, v -> annotationProcessor v }
+//    // 处理所有包含 exclude 的依赖
+//    implementationExcludes.ååeach { entry ->
+//        implementation(entry.key) {
+//            entry.value.each { childEntry ->
+//                exclude(group: childEntry)
+//            }
+//        }
+//    }
+//}

@@ -9,7 +9,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // in the individual module build.gradle.kts files
     }
 }
 
@@ -20,7 +20,7 @@ buildscript {
  * 在多项目构建中，可以通过 subprojects{} 应用在子项目中
  */
 plugins {
-    // 这个 id 就是在 versionPlugin 文件夹下 build.gradle 文件内定义的id
+    // 这个 id 就是在 versionPlugin 文件夹下 build.gradle.kts 文件内定义的id
     id "com.bimromatic.version.plugin" apply false
 }
 
