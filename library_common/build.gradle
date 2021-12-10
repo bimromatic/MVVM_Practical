@@ -14,7 +14,7 @@ android {
         testInstrumentationRunner BuildConfig.androidJUnitRunner
     }
 
-
+    /**<-------- AndroidStudio 4.0及以上版本 ------>*/
     buildFeatures {
         dataBinding = true
         viewBinding = true

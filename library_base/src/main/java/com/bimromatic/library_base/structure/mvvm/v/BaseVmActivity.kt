@@ -3,12 +3,15 @@ package com.bimromatic.library_base.structure.mvvm.v
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bimromatic.library_base.base.BaseStatusActivity
 import com.bimromatic.library_base.base.state.BaseFrameViewStatusHelperImp
 import com.bimromatic.library_base.base.state.ViewStatusHelper
 import com.bimromatic.library_base.structure.mvvm.impl.IFrameView
 import com.bimromatic.library_base.structure.mvvm.impl.IStatusView
 import com.bimromatic.library_base.structure.mvvm.vm.BaseViewModel
+import com.bimromatic.library_base.untils.EventBusUtils
+import com.bimromatic.library_base.untils.anno.EventBusRegister
 import com.bimromatic.library_base.untils.reflex.BindingReflex
 
 
@@ -37,6 +40,11 @@ abstract class BaseVmActivity<VB : ViewBinding,VM : BaseViewModel> :BaseStatusAc
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+
+        // ARouter 依赖注入
+        ARouter.getInstance().inject(this)
+        // 注册EventBus
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java)) EventBusUtils.register(this)
 
         mBinding.initView()
         initLiveDataObserve()
@@ -80,6 +88,7 @@ abstract class BaseVmActivity<VB : ViewBinding,VM : BaseViewModel> :BaseStatusAc
 
 
     override fun onDestroy() {
+        if (javaClass.isAnnotationPresent(EventBusRegister::class.java)) EventBusUtils.unRegister(this)
         super.onDestroy()
     }
 

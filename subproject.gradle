@@ -13,6 +13,7 @@ allprojects {
 
 subprojects { subproject ->
     apply plugin: 'com.bimromatic.version.plugin'
+    apply plugin: 'kotlin-kapt'
 
     if (subproject.name == "app") {
         apply plugin: 'com.android.application'

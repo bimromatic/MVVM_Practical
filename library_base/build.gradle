@@ -24,12 +24,22 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+        arg("eventBusIndex", "eventbus.index.${project.name}EventIndex")
+    }
+}
+
 dependencies {
 
     implementation fileTree(include : [ "*.jar", '*.aar'], dir : "libs")
 
     api AndroidX.CoreKtx
     api AndroidX.AppCompat
+    api AndroidX.MultiDex
+
+
     api UIMaterial.Material
     api AndroidX.ConstraintLayout
 
@@ -38,11 +48,24 @@ dependencies {
     api JetPack.LifecycleRuntimeKtx
 
     api GitHub.Gson
+    implementation GitHub.Rxjava
+
+
+
+    api GitHub.AutoService
+
+
+
+
+    api GitHub.ARoute
+    api GitHub.EventBus
+
+
+    kapt GitHub.ARouteCompiler
+    kapt GitHub.EventBusAPT
+
 
     testImplementation Android.Junit
     androidTestImplementation Android.androidTestJunit
     androidTestImplementation Android.espressoCore
-
-    implementation GitHub.Rxjava
-
 }
