@@ -1,0 +1,38 @@
+import com.bimromatic.plugin.*
+
+android {
+    compileSdk BuildConfig.compileSdkVersion
+    defaultConfig {
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        testInstrumentationRunner BuildConfig.androidJUnitRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation AndroidX.CoreKtx
+//    implementation AndroidX.AppCompat
+//    implementation UIMaterial.Material
+//    implementation AndroidX.ConstraintLayout
+
+    testImplementation Android.Junit
+    androidTestImplementation Android.androidTestJunit
+    androidTestImplementation Android.espressoCore
+    implementation project(':library_common')
+
+}

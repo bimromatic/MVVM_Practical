@@ -1,0 +1,89 @@
+// 定义的依赖地址
+import com.bimromatic.plugin.*
+
+
+
+android {
+    compileSdk BuildConfig.compileSdkVersion
+    defaultConfig {
+        //applicationId "com.bimromatic.mvvm_practical"
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        testInstrumentationRunner BuildConfig.androidJUnitRunner
+    }
+
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+//    implementation AndroidX.CoreKtx
+//    implementation AndroidX.AppCompat
+//    implementation UIMaterial.Material
+//    implementation AndroidX.ConstraintLayout
+
+    testImplementation Android.Junit
+    androidTestImplementation Android.androidTestJunit
+    androidTestImplementation Android.espressoCore
+
+    api project(':library_base')
+
+}
+
+
+// 配置导出信息
+//tasks.dokkaJavadoc.configure {
+//    // 导出的文档目录路径
+//    outputDirectory.set(new File(rootDir, "doc"))
+//    dokkaSourceSets {
+//        named("main") {
+//            noAndroidSdkLink.set(true)
+//            noStdlibLink.set(true)
+//            noJdkLink.set(true)
+//        }
+//        configureEach {
+//            // 包的定义
+//            includes.from("packages.md")
+//        }
+//    }
+//}
+
+//dokkaHtml.configure {
+//    String dokkaPath = projectDir.absolutePath.replace(rootDir.absolutePath, "")
+//    outputDirectory.set(new File(rootDir.absolutePath + File.separator + "dokka" + dokkaPath))
+//    dokkaSourceSets {
+//        named("main") {
+//            includeNonPublic.set(true)
+//            noJdkLink.set(true)
+//            noStdlibLink.set(true)
+//            noAndroidSdkLink.set(true)
+//            suppressInheritedMembers.set(true)
+//            suppressObviousFunctions.set(false)
+//        }
+//    }
+//}
+
+
+//def implementationDependencies = project.ext.dependencies
+//def processors = project.ext.annotationProcesso
+//def implementationExcludes = project.ext.implementationExcludes
+//dependencies {
+//    // 处理所有的 xxximplementation 依赖
+//    implementationDependencies.each { k, v -> implementation v }
+//    // 处理 annotationProcessor 依赖
+//    processors.each { k, v -> annotationProcessor v }
+//    // 处理所有包含 exclude 的依赖
+//    implementationExcludes.ååeach { entry ->
+//        implementation(entry.key) {
+//            entry.value.each { childEntry ->
+//                exclude(group: childEntry)
+//            }
+//        }
+//    }
+//}

@@ -1,5 +1,10 @@
-include ':app'
-includeBuild ("VersionPlugin")
-
+includeBuild ("../VersionPlugin")
+include(
+        ':app',
+        ':library_base',
+        ':module_login',
+        ':library_common'
+)
 
 rootProject.name = "MVVM—Practical"
+

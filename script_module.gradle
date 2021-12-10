@@ -1,0 +1,43 @@
+import com.bimromatic.plugin.*
+
+android {
+    compileSdk BuildConfig.compileSdkVersion
+    defaultConfig {
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        testInstrumentationRunner BuildConfig.androidJUnitRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    //api rootProject.ext.dependencies["retrofit"]
+    //testImplementation AndroidBuildSrc.Junit
+
+    implementation fileTree(include : [ "*.jar", '*.aar'], dir : "libs")
+
+    implementation AndroidX.CoreKtx
+    implementation AndroidX.AppCompat
+    implementation UIMaterial.Material
+    implementation AndroidX.ConstraintLayout
+
+    implementation JetPack.LifecycleViewModel
+    implementation JetPack.LifecycleViewModelKtx
+    implementation JetPack.LifecycleRuntimeKtx
+
+    implementation project(path: ':library_base')
+}
