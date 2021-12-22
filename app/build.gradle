@@ -1,12 +1,13 @@
-// 定义的依赖地址
-import com.bimromatic.plugin.*
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka'
 
 
 android {
     compileSdk BuildConfig.compileSdkVersion
     defaultConfig {
-        //applicationId "com.bimromatic.mvvm_practical"
+        applicationId "com.bimromatic.mvvm_practical"
         minSdk BuildConfig.minSdk
         targetSdk BuildConfig.targetSdk
         versionCode BuildConfig.versionCode
@@ -52,12 +53,17 @@ dependencies {
     implementation UIMaterial.Material
     implementation AndroidX.ConstraintLayout
 
-    testImplementation Android.Junit
-    androidTestImplementation Android.androidTestJunit
-    androidTestImplementation Android.espressoCore
+//    testImplementation Android.Junit
+//    androidTestImplementation Android.androidTestJunit
+//    androidTestImplementation Android.espressoCore
 
 
     runtimeOnly project(':module_login')
+
+
+    testImplementation DepsTest.Junit
+    androidTestImplementation DepsTest.androidTestJunit
+    androidTestImplementation DepsTest.espressoCore
 }
 
 

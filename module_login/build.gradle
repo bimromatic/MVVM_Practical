@@ -1,13 +1,34 @@
-import com.bimromatic.plugin.*
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+/*序列化插件*/
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdk BuildConfig.compileSdkVersion
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
     defaultConfig {
-        minSdk BuildConfig.minSdk
-        targetSdk BuildConfig.targetSdk
+        minSdkVersion BuildConfig.minSdk
+        targetSdkVersion BuildConfig.targetSdk
         versionCode BuildConfig.versionCode
         versionName BuildConfig.versionName
-        testInstrumentationRunner BuildConfig.androidJUnitRunner
+        consumerProguardFiles BuildConfig.androidJUnitRunner
+
+        ndk {
+            // 设置支持的SO库架构
+            //abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildTypes {
@@ -23,16 +44,36 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+        //arg("eventBusIndex", "${ProjectBuildConfig.applicationId}.eventbus.index.${project.name}EventIndex")
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-//    implementation AndroidX.CoreKtx
-//    implementation AndroidX.AppCompat
-//    implementation UIMaterial.Material
-//    implementation AndroidX.ConstraintLayout
 
-    testImplementation Android.Junit
-    androidTestImplementation Android.androidTestJunit
-    androidTestImplementation Android.espressoCore
+
+//    testImplementation Android.Junit
+//    androidTestImplementation Android.androidTestJunit
+//    androidTestImplementation Android.espressoCore
+
+    testImplementation DepsTest.Junit
+    androidTestImplementation DepsTest.androidTestJunit
+    androidTestImplementation DepsTest.espressoCore
+
+    implementation JetPack.HiltCore
+
+    kapt GitHub.ARouteCompiler
+    kapt GitHub.EventBusAPT
+    kapt GitHub.AutoServiceAnnotations
+    kapt JetPack.HiltApt
+    kapt JetPack.HiltAndroidx
+    kapt JetPack.LifecycleApt
+    
     implementation project(':library_common')
-
 }
+
+
+
