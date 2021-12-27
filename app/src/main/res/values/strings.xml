@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MVVM—Practical</string>
+    <string name="app_name" translatable="false">MVVM—Practical</string>
+    <string name="base_copy_complete" >已拷贝</string>
+    <string name="base_share" >分享</string>
 </resources>

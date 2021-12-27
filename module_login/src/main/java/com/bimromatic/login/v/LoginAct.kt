@@ -1,6 +1,6 @@
 package com.bimromatic.login.v
 
-import com.bimromatic.library_base.structure.mvvm.v.BaseVmActivity
+import com.bimromatic.base.structure.mvvm.v.BaseVmActivity
 import com.bimromatic.login.databinding.ActLoginBinding
 import com.bimromatic.login.vm.LoginModel
 

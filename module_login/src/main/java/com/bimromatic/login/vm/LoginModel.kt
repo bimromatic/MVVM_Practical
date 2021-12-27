@@ -1,6 +1,6 @@
 package com.bimromatic.login.vm
 
-import com.bimromatic.library_base.structure.mvvm.vm.BaseViewModel
+import com.bimromatic.base.structure.mvvm.vm.BaseViewModel
 
 /**
  * author : bimromatic

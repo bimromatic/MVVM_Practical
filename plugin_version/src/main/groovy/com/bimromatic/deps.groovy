@@ -1,3 +1,23 @@
+/**
+ * desc   : 项目相关参数配置
+ * author : bimromatic
+ * e-mail : xxx@xx
+ * time   : 2021/11/30
+ */
+
+
+interface BuildConfig {
+    int compileSdkVersion = 31
+    String buildToolsVersion = "29.0.3"
+    int minSdk = 21
+    int targetSdk = 31
+    int versionCode = 1
+    String versionName = "1.0.0"
+    def androidJUnitRunner = "androidx.test.runner.AndroidJUnitRunner"
+    def isAppMode = false
+
+    def versionStatus = /*"VERSION_STATUS_RELEASE"*/ "VERSION_STATUS_ALPHA" /*"VERSION_STATUS_BETA"*/
+}
 
 
 /**
@@ -62,6 +82,9 @@ interface Version{
     String LeakCanary = "2.4"                        // 检测内存泄漏
     String AutoService = "1.0"                       // 自动生成SPI暴露服务文件
 
+
+    String Splitties = "2.1.1"
+
     // 第三方SDK--------------------------------------------------------------
     String TencentBugly = "3.3.7"                 // 腾讯Bugly 异常上报
     String TencentBuglyNative = "3.8.0"                     // Bugly native异常上报
@@ -78,16 +101,7 @@ interface Version{
 }
 
 
-interface BuildConfig {
-    int compileSdkVersion = 31
-    String buildToolsVersion = "29.0.3"
-    int minSdk = 21
-    int targetSdk = 31
-    int versionCode = 1
-    String versionName = "1.0.0"
-    def androidJUnitRunner = "androidx.test.runner.AndroidJUnitRunner"
-    def isAppMode = false
-}
+
 
 
 
@@ -203,6 +217,10 @@ interface GitHub {
     //:自动解绑<MVP 模式下面 view 与 Presenter 自动解绑解决内存泄漏的风险> ==》https://github.com/uber/AutoDispose
     String Autodispose = "com.uber.autodispose2:autodispose-android:${Version.AutoDispose}"
 
+
+    String Appctx = "com.louiscad.splitties:splitties-appctx:${Version.Splitties}"
+    String Systemservices = "com.louiscad.splitties:splitties-systemservices:${Version.Splitties}"
+    String Views = "com.louiscad.splitties:splitties-views:${Version.Splitties}"
 }
 
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="base_copy_complete" translatable="false">已拷贝</string>
+    <string name="base_share" translatable="false">分享</string>
+
+
+</resources>

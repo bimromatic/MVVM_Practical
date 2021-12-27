@@ -71,8 +71,9 @@ dependencies {
     kapt JetPack.HiltApt
     kapt JetPack.HiltAndroidx
     kapt JetPack.LifecycleApt
-    
-    implementation project(':library_common')
+
+
+    api project(':library_common')
 }
 
 

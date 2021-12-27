@@ -98,6 +98,9 @@ dependencies {
     api GitHub.Glide
     api GitHub.ARoute
     api GitHub.RecyclerViewAdapter
+    api GitHub.Appctx
+    api GitHub.Systemservices
+    api GitHub.Views
 
     /**kapt*/
     kapt GitHub.GlideCompiler
