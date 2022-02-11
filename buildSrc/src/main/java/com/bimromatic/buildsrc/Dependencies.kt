@@ -11,10 +11,13 @@
 object ProjectPlugin {
     val AndroidGradleToolsPlugin by lazy { "com.android.tools.build:gradle:7.0.4" }
     val AndroidToolsPlugin by lazy { "com.android.tools.build:gradle:4.2.1" }
-    val KotlinPlugin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21" }
+    val KotlinPlugin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10" }
     val ARouterRegister by lazy { "com.alibaba:arouter-register:1.0.2" }
     val HiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:2.38.1" }
     val DokkaGradle by lazy { "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0" }
+    val GradleMavenPublish by lazy { "com.vanniktech:gradle-maven-publish-plugin:0.18.0" }
+    val GradleVersionsPlugin by lazy { "com.github.ben-manes:gradle-versions-plugin:+" }
+
 }
 
 object GradlePluginId{
@@ -33,4 +36,6 @@ object GradlePluginId{
     const val AndroidPlugin = "android"
     const val kaptPlugin = "kapt"
 
+    const val KotlinParcelize = "kotlin-parcelize"/*序列化插件*/
+    const val MavenPublish = "maven-publish"
 }

@@ -27,7 +27,10 @@ class LoginApplication: ApplicationLifecycle {
     override fun onTerminate(application: Application) {
     }
 
-    override fun initByFrontDesk(): InitDepend = InitDepend(mutableListOf(), mutableListOf())
+    override fun initByFrontDesk(): MutableList<() -> String> = mutableListOf()
+
+
+    //override fun initByFrontDesk(): InitDepend = InitDepend(mutableListOf(), mutableListOf())
 
     override fun initByBackstage() {
         Log.e("","")

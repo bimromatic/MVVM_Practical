@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="widget_TransitTextView">
+        <attr name="text" format="string" />
+        <attr name="text_size" format="dimension" />
+        <attr name="flick_precent" format="float" />
+        <attr name="text_normal_color" format="color|reference" />
+        <attr name="text_flick_color" format="color|reference" />
+    </declare-styleable>
+
+</resources>

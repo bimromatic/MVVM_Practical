@@ -1,22 +1,24 @@
+import com.bimromatic.plugin.Dep
+
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
 
 android {
-    compileSdk BuildConfig.compileSdkVersion
+    compileSdk Dep.ProjectBuildConfig.compileSdkVersion
 
     defaultConfig {
-        minSdk  BuildConfig.minSdk
-        targetSdk BuildConfig.targetSdk
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
+        minSdk  Dep.ProjectBuildConfig.minSdk
+        targetSdk Dep.ProjectBuildConfig.targetSdk
+        versionCode Dep.ProjectBuildConfig.versionCode
+        versionName Dep.ProjectBuildConfig.versionName
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -32,13 +34,13 @@ android {
 dependencies {
 
     /**AndroidX*/
-    api AndroidX.CoreKtx
-    api AndroidX.AppCompat
-    api AndroidX.MultiDex
-    api AndroidX.ConstraintLayout
+    api Dep.AndroidX.CoreKtx
+    api Dep.AndroidX.AppCompat
+    api Dep.AndroidX.MultiDex
+    api Dep.AndroidX.ConstraintLayout
 
 
-    testImplementation DepsTest.Junit
-    androidTestImplementation DepsTest.androidTestJunit
-    androidTestImplementation DepsTest.espressoCore
+    testImplementation Dep.DepsTest.Junit
+    androidTestImplementation Dep.DepsTest.androidTestJunit
+    androidTestImplementation Dep.DepsTest.espressoCore
 }

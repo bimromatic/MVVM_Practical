@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--——————————————————————start 全局活动跳转动画 ——————————————————————-->
+    <style name="global_act_transition_animation" parent="@android:style/Animation.Activity">
+        <!-- 进入一个新的Activity的时候，A->B B进入动画 -->
+        <item name="android:activityOpenEnterAnimation">@anim/fragment_close_enter</item>
+        <!-- 退出一个Activity的时候，B返回到A B退出动画 -->
+        <item name="android:activityCloseExitAnimation">@anim/fragment_close_exit</item>
+    </style>
+    <!--—————————————————————— 全局活动跳转动画 end——————————————————————-->
+
+
+
+</resources>

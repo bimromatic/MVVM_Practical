@@ -1,6 +1,7 @@
 package com.bimromatic.base.structure.mvvm.v
 
 import android.os.Bundle
+import android.util.Log
 import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bimromatic.base.base.BaseStatusActivity
@@ -9,8 +10,10 @@ import com.bimromatic.base.base.state.ViewStatusHelper
 import com.bimromatic.base.structure.mvvm.impl.IFrameView
 import com.bimromatic.base.structure.mvvm.impl.IStatusView
 import com.bimromatic.base.structure.mvvm.vm.BaseViewModel
+import com.bimromatic.base.untils.AndroidBugFixUtils
 import com.bimromatic.base.untils.EventBusUtils
 import com.bimromatic.base.untils.anno.EventBusRegister
+import com.bimromatic.base.untils.manager.ActivityStackManager
 import com.bimromatic.base.untils.reflex.BindingReflex
 
 
@@ -88,9 +91,17 @@ abstract class BaseVmActivity<VB : ViewBinding,VM : BaseViewModel> :BaseStatusAc
 
     override fun onDestroy() {
         if (javaClass.isAnnotationPresent(EventBusRegister::class.java)) EventBusUtils.unRegister(this)
+        // 处理华为手机mlastsrvview内存泄露问题
+        AndroidBugFixUtils().fixLeak(this)
+        AndroidBugFixUtils().fixSoftInputLeaks(this)
         super.onDestroy()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ActivityLifecycle", "ActivityStack: ${ActivityStackManager.activityStack}")
+    }
 
 
 }

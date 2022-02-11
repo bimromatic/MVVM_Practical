@@ -1,11 +1,14 @@
 import java.io.ByteArrayOutputStream
-import com.bimromatic.plugin.*
+import com.bimromatic.plugin.Dep
+import org.jetbrains.kotlin.config.JvmAnalysisFlags.useIR
+import kotlin.reflect.full.memberFunctions
 
 plugins {
     id(GradlePluginId.ANDROID_APPLICATION)
     id(GradlePluginId.DokkaPlugin)
     kotlin(GradlePluginId.AndroidPlugin)
     kotlin(GradlePluginId.kaptPlugin)
+    id(GradlePluginId.HiltPlugin)
 }
 
 fun runCommand(project: Project, command: String): String {
@@ -21,9 +24,20 @@ val gitVersion = runCommand(project, "git rev-list HEAD --count").toIntOrNull() 
 
 
 
+//获取git提交次数
+fun getGitCommitCount(): String {
+    val os = org.apache.commons.io.output.ByteArrayOutputStream()
+    project.exec {
+        commandLine = "git rev-list --count HEAD".split(" ")
+        standardOutput = os
+    }
+    return String(os.toByteArray()).trim()
+}
+
+
 android {
 
-    compileSdk = BuildConfig.compileSdkVersion
+    compileSdk = Dep.ProjectBuildConfig.compileSdkVersion
 
 
     compileOptions {
@@ -31,30 +45,82 @@ android {
         targetCompatibility = Dep.javaVersion
     }
 
-    buildFeatures {
-        compose = true
-    }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = Dep.Version.version
-    }
 
 
     defaultConfig {
         applicationId = "com.bimromatic.mvvm_practical"
-        minSdk=BuildConfig.minSdk
-        targetSdk =BuildConfig.targetSdk
-        versionCode =BuildConfig.versionCode
-        versionName =BuildConfig.versionName
+        minSdk = Dep.ProjectBuildConfig.minSdk
+        targetSdk = Dep.ProjectBuildConfig.targetSdk
+        versionCode = Dep.ProjectBuildConfig.versionCode
+        versionName = Dep.ProjectBuildConfig.versionName
         //testInstrumentationRunner= BuildConfig.androidJUnitRunner
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled=false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-    }
+
+
+//    buildTypes {
+//        getByName("release") {
+//            isMinifyEnabled = true
+//            // TODO: b/120517460 shrinkResource can't be used with dynamic-feature at this moment.
+//            // Need to ensure the app size has not increased
+//            //manifestPlaceholders["crashlyticsEnabled"] = true
+//            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+//            //resValue("string", "google_maps_key", "AIzaSyD5jqwKMm1SeoYsW25vxCXfTlhDBeZ4H5c")
+//            //buildConfigField("String", "MAP_TILE_URL_BASE", "\"https://storage.googleapis.com/io2019-festivus-prod/images/maptiles\"")
+//        }
+//        getByName("debug") {
+//            versionNameSuffix = "-debug"
+//            //manifestPlaceholders["crashlyticsEnabled"] = false
+//            //resValue("string", "google_maps_key", "AIzaSyAhJx57ikQH9rYc8IT8W3d2As5cGHMBvuo")
+//            //buildConfigField("String", "MAP_TILE_URL_BASE", "\"https://storage.googleapis.com/io2019-festivus/images/maptiles\"")
+//        }
+//        maybeCreate("staging")
+//        getByName("staging") {
+//            // TODO: replace with initWith(getByName("debug")) in 7.0.0-beta04
+//            // https://issuetracker.google.com/issues/186798050
+//            this::class.memberFunctions.first { it.name == "initWith" }.call(this, getByName("debug"))
+//            versionNameSuffix = "-staging"
+//            // Specifies a sorted list of fallback build types that the
+//            // plugin should try to use when a dependency does not include a
+//            // "staging" build type.
+//            // Used with :test-shared, which doesn't have a staging variant.
+//            matchingFallbacks += listOf("debug")
+//        }
+//    }
+
+
+
+//    signingConfigs {
+//        // We need to sign debug builds with a debug key to make firebase auth happy
+//        getByName("debug") {
+//            storeFile = file("../debug.keystore")
+//            keyAlias = "androiddebugkey"
+//            keyPassword = "android"
+//            storePassword = "android"
+//        }
+//
+//
+//        getByName("debug") {
+//            storeFile = file("../debug.keystore")
+//            keyAlias = "androiddebugkey"
+//            keyPassword = "android"
+//            storePassword = "android"
+//        }
+//    }
+
+//    // debug and release variants share the same source dir
+//    sourceSets {
+//        getByName("debug") {
+//            java.srcDir("src/debugRelease/java")
+//        }
+//        getByName("release") {
+//            java.srcDir("src/debugRelease/java")
+//        }
+//    }
+
+
+
 //    dokka {
 //        outputFormat = 'javadoc'
 //        outputDirectory = "$buildDir/docs"
@@ -71,10 +137,31 @@ android {
 //    }
 
     buildFeatures {
-        dataBinding = true
+        //compose = true
+        //dataBinding = true
         viewBinding = true
     }
+
+
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = "1.1.0-rc01"
+//    }
+
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+
+    compileOptions {
+        sourceCompatibility = Dep.javaVersion
+        targetCompatibility = Dep.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = Dep.kotlinJvmTarget
+    }
+
+    kapt.includeCompileClasspath = true
 }
+
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
@@ -83,24 +170,30 @@ dependencies {
     //api rootProject.ext.dependencies["retrofit"]
     //testImplementation AndroidBuildSrc.Junit
 
-    implementation(AndroidX.CoreKtx)
-    implementation(AndroidX.AppCompat)
-    implementation(UIMaterial.Material)
-    implementation(AndroidX.ConstraintLayout)
-
-//    testImplementation Android.Junit
-//    androidTestImplementation Android.androidTestJunit
-//    androidTestImplementation Android.espressoCore
-
-
     //runtimeOnly project(':module_login')
     //implementation project(':module_login')
     implementation(project(":module_login"))
 
+    implementation(Dep.AndroidX.CoreKtx)
+    implementation(Dep.AndroidX.AppCompat)
+    implementation(Dep.UIMaterial.Material)
+    implementation(Dep.AndroidX.ConstraintLayout)
 
-    testImplementation(DepsTest.Junit)
-    androidTestImplementation(DepsTest.androidTestJunit)
-    androidTestImplementation(DepsTest.espressoCore)
+
+    implementation(Dep.JetPack.HiltCore)
+
+    kapt(Dep.GitHub.ARouteCompiler)
+    kapt(Dep.GitHub.EventBusAPT)
+    kapt(Dep.GitHub.AutoServiceAnnotations)
+    kapt(Dep.JetPack.HiltApt)
+    kapt(Dep.JetPack.HiltAndroidx)
+    kapt(Dep.JetPack.LifecycleApt)
+
+
+
+    testImplementation(Dep.DepsTest.Junit)
+    androidTestImplementation(Dep.DepsTest.androidTestJunit)
+    androidTestImplementation(Dep.DepsTest.espressoCore)
 }
 
 
@@ -165,3 +258,21 @@ dependencies {
 //    }
 //    return stdout.toString().trim()
 //}
+
+kapt {
+    correctErrorTypes = true
+    includeCompileClasspath = true
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+        arg("eventBusIndex", "eventbus.index.${project.name}EventIndex")
+    }
+}
+
+//依赖库
+//apply(from = "depends.gradle")
+
+//task
+//apply(from = "tasks.gradle")
+
+//aop
+//apply(from = "aopconfig.gradle")

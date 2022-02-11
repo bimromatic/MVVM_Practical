@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="window_anim_duration">400</integer>
+
+    <!-- Activity 转场动画时间 -->
+    <integer name="activity_anim_duration">200</integer>
+    <integer name="ucrop_progress_loading_anim_time">1500</integer>
+
+
+    <integer name="number_1">1</integer>
+    <integer name="number_2">2</integer>
+    <integer name="number_3">3</integer>
+    <integer name="number_4">4</integer>
+    <integer name="number_5">5</integer>
+    <integer name="number_5_half">5</integer>
+    <integer name="number_6">6</integer>
+    <integer name="number_7">7</integer>
+    <integer name="number_8">8</integer>
+    <integer name="number_9">9</integer>
+    <integer name="number_10">10</integer>
+    <integer name="number_11">11</integer>
+    <integer name="number_12">12</integer>
+    <integer name="number_13">13</integer>
+    <integer name="number_14">14</integer>
+    <integer name="number_15">15</integer>
+    <integer name="number_16">16</integer>
+    <integer name="number_17">17</integer>
+    <integer name="number_18">18</integer>
+    <integer name="number_19">19</integer>
+    <integer name="number_20">20</integer>
+    <integer name="number_21">21</integer>
+    <integer name="number_22">22</integer>
+    <integer name="number_23">23</integer>
+    <integer name="number_24">24</integer>
+    <integer name="number_25">25</integer>
+    <integer name="number_26">26</integer>
+    <integer name="number_27">27</integer>
+    <integer name="number_28">28</integer>
+    <integer name="number_29">29</integer>
+    <integer name="number_30">30</integer>
+    <integer name="number_31">31</integer>
+    <integer name="number_32">32</integer>
+    <integer name="number_33">33</integer>
+    <integer name="number_34">34</integer>
+    <integer name="number_35">35</integer>
+    <integer name="number_36">36</integer>
+    <integer name="number_37">37</integer>
+    <integer name="number_38">38</integer>
+    <integer name="number_39">39</integer>
+    <integer name="number_40">40</integer>
+
+    <integer name="number_60">60</integer>
+
+    <integer name="number_125">125</integer>
+
+
+
+
+    <!-- 短信验证码的长度 -->
+    <integer name="sms_code_length">@integer/number_6</integer>
+    <integer name="sms_code_countdown_time">@integer/number_60</integer>
+
+</resources>

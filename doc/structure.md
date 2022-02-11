@@ -1,0 +1,3 @@
+ViewModel:持有LiveData、从Repository获取数据，并向View提供数据
+Repository:获取和处理数据，可以从网络、数据库或者其他API获取并处理数据
+LiveData:具有生命周期感知能力的可观察的数据储存器，通知View展示数据

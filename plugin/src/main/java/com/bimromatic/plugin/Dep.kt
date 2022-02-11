@@ -17,7 +17,9 @@ object Dep {
     const val group = "com.bimromatic"
 
 
-    object BuildConfig {
+
+
+    object ProjectBuildConfig {
         const val compileSdkVersion = 31
         const val buildToolsVersion = "29.0.3"
         const val minSdk = 21
@@ -37,6 +39,18 @@ object Dep {
         const val ARouterRegister = "com.alibaba:arouter-register:1.0.2"
         const val HiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
         const val DokkaGradle = "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
+        const val GradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
+    }
+
+
+    /**
+     * 基础私有库
+     */
+
+
+    object BimromaticLib{
+        const val LibBase = "com.bimromatic:lib_base:0.0.1"
+        const val LibCommon = "com.bimromatic:lib-common:0.0.1"
     }
 
 
@@ -77,9 +91,10 @@ object Dep {
         const val LifecycleViewModel = "2.2.0"
         const val LifecycleRuntimeKtx = "2.2.0"
         const val LifecycleViewModelKtx = "2.2.0"
-        const val Lifecycle = "2.3.1"                       // Lifecycle相关（ViewModel & LiveData & Lifecycle）
+        const val Lifecycle = "2.4.0"                       // Lifecycle相关（ViewModel & LiveData & Lifecycle）
+        const val Arch = "2.1.0"
         const val Room = "2.3.0"                            // 官方推荐数据库框架
-        const val Hilt = "2.35.1"                           // DI框架-Hilt
+        const val Hilt = "2.40.5"                           // DI框架-Hilt
         const val HiltAndroidx = "1.0.0"
         const val WorkVersion = "2.7.1"
 
@@ -120,7 +135,7 @@ object Dep {
 
 
         // Compose--------------------------------------------------------------
-        val version = "1.1.0-rc01"
+        val composeVersion = "1.1.0"
     }
 
 
@@ -172,14 +187,39 @@ object Dep {
      */
 
     object JetPack {
+
+        // ViewModel
         const val LifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel:${Version.LifecycleViewModel}"
         const val LifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.LifecycleRuntimeKtx}"
-        const val LifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.LifecycleViewModelKtx}"
+        const val LifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.Lifecycle}"
+        const val lifecycleViewmodelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Version.Lifecycle}"
+        //Saved state module for ViewModel
         const val LifecycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.Lifecycle}"
+        // LiveData
         const val LifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.Lifecycle}"
+        //Lifecycles only (without ViewModel or LiveData)
         const val LifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.Lifecycle}"
+
+        //Annotation processor
         const val LifecycleApt = "androidx.lifecycle:lifecycle-compiler:${Version.Lifecycle}"
+
         const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Version.Lifecycle}"
+
+        //alternately - if using Java8, use the following instead of lifecycle-compiler
+        const val lifecycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Version.Lifecycle}"
+
+        // optional - helpers for implementing LifecycleOwner in a Service
+        const val LifecycleService = "androidx.lifecycle:lifecycle-service:${Version.Lifecycle}"
+
+        // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+        const val LifecycleProcess = "androidx.lifecycle:lifecycle-process:${Version.Lifecycle}"
+
+        // optional - ReactiveStreams support for LiveData
+        const val LifecycleReactivestreamsKtx  = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Version.Lifecycle}"
+
+        // optional - Test helpers for LiveData
+        const val CoreTestingtest = "androidx.arch.core:core-testing:${Version.Arch}"
+
 
         const val Room = "androidx.room:room-runtime:${Version.Room}"
         const val RoomCompiler = "androidx.room:room-compiler:${Version.Room}"
@@ -192,6 +232,10 @@ object Dep {
 
 
         const val WorkRuntimeKtx = "androidx.work:work-runtime-ktx:${Version.WorkVersion}"
+
+
+
+        // ViewModel utilities for Compose
     }
 
     /**
@@ -201,10 +245,10 @@ object Dep {
      * time   : 2021/11/30
      */
     object Compose {
-        val animation = "androidx.compose.animation:animation:${Version.version}"
-        val ui = "androidx.compose.ui:ui:${Version.version}"
-        val material = "androidx.compose.material:material:${Version.version}"
-        val compiler = "androidx.compose.compiler:compiler:${Version.version}"
+        val animation = "androidx.compose.animation:animation:${Version.composeVersion}"
+        val ui = "androidx.compose.ui:ui:${Version.composeVersion}"
+        val material = "androidx.compose.material:material:${Version.composeVersion}"
+        val compiler = "androidx.compose.compiler:compiler:${Version.composeVersion}"
     }
 
     /**

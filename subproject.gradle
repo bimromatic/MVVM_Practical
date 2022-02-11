@@ -7,21 +7,21 @@ allprojects {
         mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/gradle.md-plugin' }
     }
 }
 
 subprojects { subproject ->
     apply plugin: 'com.bimromatic.version.plugin'
-    apply plugin: 'kotlin-kapt'
+    apply plugin: 'kotlin.md-kapt'
 
     if (subproject.name == "app") {
         apply plugin: 'com.android.application'
-        apply plugin: 'kotlin-android'
+        apply plugin: 'kotlin.md-android'
         apply plugin: 'org.jetbrains.dokka'
     }else {
         apply plugin: 'com.android.library'
-        apply plugin: 'kotlin-android'
+        apply plugin: 'kotlin.md-android'
     }
 }
 

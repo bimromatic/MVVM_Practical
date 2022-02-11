@@ -53,16 +53,25 @@ class CommonApplication : ApplicationLifecycle {
      */
     override fun onTerminate(application: Application) {}
 
-    override fun initByFrontDesk(): InitDepend {
-        val worker = mutableListOf<() -> String>()
-        val main = mutableListOf<() -> String>()
+    override fun initByFrontDesk(): MutableList<() -> String> {
+//        val worker = mutableListOf<() -> String>()
+//        val main = mutableListOf<() -> String>()
+//        // 以下只需要在主进程当中初始化 按需要调整
+//        if (ProcessUtils.isMainProcess(BaseApplication.context)) {
+//            //worker.add { initMMKV() }
+//            worker.add { initARouter() }
+//        }
+//        //worker.add { initTencentBugly() }
+//        return InitDepend(main, worker)
+
+        val list = mutableListOf<() -> String>()
         // 以下只需要在主进程当中初始化 按需要调整
         if (ProcessUtils.isMainProcess(BaseApplication.context)) {
-            //worker.add { initMMKV() }
-            worker.add { initARouter() }
+            list.add {
+                initARouter()
+            }
         }
-        //worker.add { initTencentBugly() }
-        return InitDepend(main, worker)
+        return list
     }
 
     override fun initByBackstage() {

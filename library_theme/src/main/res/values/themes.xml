@@ -1,4 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!--Customize your theme here.-->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <!--<item name="actionOverflowMenuStyle">@style/Style.PopupMenu</item> 点击ActionBar中的更多按钮  -->
+        <!--<item name="android:itemTextAppearance">@style/Style.MenuItemText</item>-->
+       <!-- <item name="android:popupMenuStyle">@style/Style.PopupMenu</item>-->
+       <!-- <item name="android:statusBarColor">@color/transparent</item>-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
     <!-- Base application theme. -->
 <!--    <style name="Theme.Nesttree" parent="Theme.MaterialComponents.DayNight">-->
 <!--        <item name="windowNoTitle">true</item>-->
@@ -50,5 +62,16 @@
 <!--        <item name="android:windowFullscreen">true</item>-->
 <!--        <item name="android:windowBackground">@drawable/launcher_bg</item>-->
 <!--    </style>-->
+
+
+
+    <!--——————————————————————AppTheme.Launcher——————————————————————-->
+    <style name="AppTheme.Launcher" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/Animation_Splash</item>
+    </style>
+    <style name="Animation_Splash" parent="@android:style/Animation.Activity">
+       <!-- <item name="android:activityOpenEnterAnimation">@anim/anim_scale_in</item>-->
+    </style>
+    <!--——————————————————————AppTheme.Launcher——————————————————————-->
 
 </resources>

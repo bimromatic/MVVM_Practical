@@ -1,7 +1,7 @@
 package com.bimromatic.base.structure.mvvm.m
 
-import com.bimromatic.base.structure.entity.BaseRespondEntity
-import com.bimromatic.base.structure.entity.State
+import com.bimromatic.base.entity.BaseRespondEntity
+import com.bimromatic.base.entity.State
 
 /**
  * author : bimromatic
@@ -10,7 +10,7 @@ import com.bimromatic.base.structure.entity.State
  * desc   :
  * version: 1.0
  */
-class BaseRepository {
+open class BaseRepository {
     suspend fun <T : Any> executeRequest(
         block: suspend () -> BaseRespondEntity<T>
     ): BaseRespondEntity<T> {

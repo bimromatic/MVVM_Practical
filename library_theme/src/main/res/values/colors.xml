@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">@color/md_light_blue_600</color>
+    <color name="primaryDark">@color/md_light_blue_700</color>
+    <color name="accent">@color/md_pink_800</color>
 
 </resources>

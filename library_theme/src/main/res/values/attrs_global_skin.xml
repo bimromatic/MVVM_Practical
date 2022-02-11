@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--定义皮肤的全部属性，例如全局的背景色，全局的字体色等-->
+    <declare-styleable name="skin_attr">
+        <attr name="Theme_bg_color" format="color|reference"></attr>
+        <attr name="button_bg" format="color|reference"></attr>
+        <attr name="button_text_color" format="color|reference"></attr>
+        <attr name="text_color" format="color|reference"></attr>
+        <attr name="line_color" format="color|reference"></attr>
+    </declare-styleable>
+
+</resources>

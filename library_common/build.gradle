@@ -1,9 +1,21 @@
+import com.bimromatic.plugin.Dep
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 /*序列化插件*/
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'maven-publish'
+
+//plugins{
+//    id(GradlePluginId.ANDROID_LIBRARY)
+//    kotlin(GradlePluginId.AndroidPlugin)
+//    kotlin(GradlePluginId.kaptPlugin)
+//    id(GradlePluginId.HiltPlugin)
+//    id(GradlePluginId.KotlinParcelize)
+//    id(GradlePluginId.MavenPublish)
+//}
 
 
 
@@ -13,14 +25,14 @@ android {
     //避免编译不能用于在编译类路径中发现的注解处理器，因为它们中的任何更改都需要运行注解处理任务
     //kapt.includeCompileClasspath = false
 
-    compileSdkVersion BuildConfig.compileSdkVersion
-    buildToolsVersion BuildConfig.buildToolsVersion
+    compileSdkVersion Dep.ProjectBuildConfig.compileSdkVersion
+    buildToolsVersion Dep.ProjectBuildConfig.buildToolsVersion
     defaultConfig {
-        minSdkVersion BuildConfig.minSdk
-        targetSdkVersion BuildConfig.targetSdk
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
-        consumerProguardFiles BuildConfig.androidJUnitRunner
+        minSdkVersion Dep.ProjectBuildConfig.minSdk
+        targetSdkVersion Dep.ProjectBuildConfig.targetSdk
+        versionCode Dep.ProjectBuildConfig.versionCode
+        versionName Dep.ProjectBuildConfig.versionName
+        consumerProguardFiles Dep.ProjectBuildConfig.androidJUnitRunner
 
         ndk {
             // 设置支持的SO库架构
@@ -30,18 +42,20 @@ android {
 
 
         // 相关自定义配置
-        resValue "string", "VERSION_STATUS", BuildConfig.versionStatus
+        resValue "string", "VERSION_STATUS", Dep.ProjectBuildConfig.versionStatus
         //resValue "string", "BUGLY_APP_ID", SDKKeyConfig.BUGLY_APP_ID
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    kapt.includeCompileClasspath = true
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+//
+//    kotlinOptions {
+//        jvmTarget = JavaVersion.VERSION_1_8.toString()
+//    }
 
     /**<-------- AndroidStudio 4.0及以上版本 ------>*/
     buildFeatures {
@@ -53,18 +67,20 @@ android {
 
 dependencies {
 
-    api JetPack.HiltCore
+    api Dep.JetPack.HiltCore
 
-    kapt GitHub.ARouteCompiler
-    kapt GitHub.EventBusAPT
-    kapt GitHub.AutoServiceAnnotations
-    kapt JetPack.HiltApt
-    kapt JetPack.HiltAndroidx
-    kapt JetPack.LifecycleApt
-    kapt JetPack.RoomCompiler
+    kapt Dep.GitHub.ARouteCompiler
+    kapt Dep.GitHub.EventBusAPT
+    kapt Dep.GitHub.AutoServiceAnnotations
+    kapt Dep.JetPack.HiltApt
+    kapt Dep.JetPack.HiltAndroidx
+    kapt Dep.JetPack.LifecycleApt
+    kapt Dep.JetPack.RoomCompiler
 
+
+    //api Dep.BimromaticLib.LibBase
     api project(':library_base')
-    api project(':library_theme')
+    //api project(':library_theme')
 }
 
 
@@ -120,7 +136,31 @@ dependencies {
 //}
 
 kapt {
+    correctErrorTypes = true
+    includeCompileClasspath = true
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
+    }
+}
+
+allprojects {
+    plugins.withId("com.vanniktech.maven.publish") {
+        mavenPublish {
+            releaseSigningEnabled = true
+        }
+    }
+}
+
+
+
+apply plugin: "com.vanniktech.maven.publish"
+//apply(plugin = "com.google.gms.google-services")

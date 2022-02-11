@@ -3,8 +3,7 @@
     package="com.bimromatic.common">
 
 
-    <application
-        android:name="com.bimromatic.base.app.BaseApplication">
+    <application>
 
         <!-- 屏幕适配基准DP -->
         <meta-data

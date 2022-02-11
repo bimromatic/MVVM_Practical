@@ -12,9 +12,27 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        //assertEquals(4, 2 + 2)
+
+
     }
 }
+
+interface Base {
+    fun printMessage()
+    fun printMessageLine()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun printMessage() { print(x) }
+    override fun printMessageLine() { println(x) }
+}
+
+class Derived(b: Base) : Base by b {
+    override fun printMessage() { print("abc") }
+}
+
+
 
 
 /**
@@ -23,7 +41,10 @@ class ExampleUnitTest {
  * 这里需要注意的是，lock 函数 的第三个参数传入 method 时，要确定参数个数、类型、返回值都和其形参一致。：
  */
 fun main(args: Array<String>) {
-    println(lock("param1", "param2", ::getResult))
+   // println(lock("param1", "param2", ::getResult))
+    val b = BaseImpl(10)
+    Derived(b).printMessage()
+    Derived(b).printMessageLine()
 }
 
 /**

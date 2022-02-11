@@ -1,3 +1,5 @@
+import com.bimromatic.plugin.Dep
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -6,14 +8,14 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion BuildConfig.compileSdkVersion
-    buildToolsVersion BuildConfig.buildToolsVersion
+    compileSdkVersion Dep.ProjectBuildConfig.compileSdkVersion
+    buildToolsVersion Dep.ProjectBuildConfig.buildToolsVersion
     defaultConfig {
-        minSdkVersion BuildConfig.minSdk
-        targetSdkVersion BuildConfig.targetSdk
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
-        consumerProguardFiles BuildConfig.androidJUnitRunner
+        minSdkVersion Dep.ProjectBuildConfig.minSdk
+        targetSdkVersion Dep.ProjectBuildConfig.targetSdk
+        versionCode Dep.ProjectBuildConfig.versionCode
+        versionName Dep.ProjectBuildConfig.versionName
+        consumerProguardFiles Dep.ProjectBuildConfig.androidJUnitRunner
 
         ndk {
             // 设置支持的SO库架构
@@ -42,9 +44,13 @@ android {
         dataBinding = true
         viewBinding = true
     }
+
+    kapt.includeCompileClasspath = true
 }
 
 kapt {
+    correctErrorTypes = true
+    includeCompileClasspath = true
     arguments {
         arg("AROUTER_MODULE_NAME", project.name)
         //arg("eventBusIndex", "${ProjectBuildConfig.applicationId}.eventbus.index.${project.name}EventIndex")
@@ -59,21 +65,22 @@ dependencies {
 //    androidTestImplementation Android.androidTestJunit
 //    androidTestImplementation Android.espressoCore
 
-    testImplementation DepsTest.Junit
-    androidTestImplementation DepsTest.androidTestJunit
-    androidTestImplementation DepsTest.espressoCore
+    testImplementation Dep.DepsTest.Junit
+    androidTestImplementation Dep.DepsTest.androidTestJunit
+    androidTestImplementation Dep.DepsTest.espressoCore
 
-    implementation JetPack.HiltCore
+    implementation Dep.JetPack.HiltCore
 
-    kapt GitHub.ARouteCompiler
-    kapt GitHub.EventBusAPT
-    kapt GitHub.AutoServiceAnnotations
-    kapt JetPack.HiltApt
-    kapt JetPack.HiltAndroidx
-    kapt JetPack.LifecycleApt
+    kapt Dep.GitHub.ARouteCompiler
+    kapt Dep.GitHub.EventBusAPT
+    kapt Dep.GitHub.AutoServiceAnnotations
+    kapt Dep.JetPack.HiltApt
+    kapt Dep.JetPack.HiltAndroidx
+    kapt Dep.JetPack.LifecycleApt
 
 
     api project(':library_common')
+    //api Dep.BimromaticLib.LibCommon
 }
 
 

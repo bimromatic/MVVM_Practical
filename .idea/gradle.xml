@@ -12,9 +12,9 @@
                   <project path="$PROJECT_DIR$/plugin" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/plugin_version" name="plugin_version">
+              <build path="$PROJECT_DIR$/../plugin_version" name="plugin_version">
                 <projects>
-                  <project path="$PROJECT_DIR$/plugin_version" />
+                  <project path="$PROJECT_DIR$/../plugin_version" />
                 </projects>
               </build>
             </builds>
@@ -23,7 +23,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="11" />
+        <option name="gradleJvm" value="corretto-11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -31,10 +31,9 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/library_base" />
             <option value="$PROJECT_DIR$/library_common" />
-            <option value="$PROJECT_DIR$/library_theme" />
             <option value="$PROJECT_DIR$/module_login" />
             <option value="$PROJECT_DIR$/plugin" />
-            <option value="$PROJECT_DIR$/plugin_version" />
+            <option value="$PROJECT_DIR$/../plugin_version" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

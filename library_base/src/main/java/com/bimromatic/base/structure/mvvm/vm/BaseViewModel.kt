@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
  * author : bimromatic
  * e-mail : xxx@xx
  * time   : 2021/12/3
- * desc   : viewmodel+liveData { VM层 }
+ * desc   : viewmodel+liveData { VM层 }  业务逻辑层
  * version: 1.0
  */
 open class BaseViewModel:ViewModel() {

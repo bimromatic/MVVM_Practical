@@ -1,0 +1,137 @@
+apply plugin: 'maven-publish'
+//maven-publish.sh 是将项目发布到 Maven 仓库的插件。
+apply plugin: 'signing'
+//signing 是签名插件，为发布生成的文件进行签名。
+
+
+
+//生成文档注释
+task androidJavadocs(type: Javadoc) {
+    failOnError = false
+    source = android.sourceSets.main.java.srcDirs
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath += files(ext.androidJar)
+}
+//将文档打包成jar
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+//将源码打包
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+
+ext["signing.keyId"] = ''
+ext["signing.password"] = ''
+ext["signing.secretKeyRingFile"] = ''
+ext["ossrhUsername"] = ''
+ext["ossrhPassword"] = ''
+
+File secretPropsFile = project.rootProject.file('local.properties')
+if (secretPropsFile.exists()) {
+    println "Found secret props file, loading props"
+    Properties p = new Properties()
+    p.load(new FileInputStream(secretPropsFile))
+    p.each { name, value ->
+        ext[name] = value
+    }
+} else {
+    println "No props file, loading env vars"
+}
+
+
+
+
+
+
+publishing {
+    publications {
+        release(MavenPublication) {//dev是我取的名称，可以自定义
+            groupId = 'com.bimromatic'//域名反写
+            artifactId = 'lib_base'//aar的名称
+            version = '0.0.1'//版本号
+            artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
+            artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
+            //artifact "build/outputs/aar/library_base-release.aar"//aar包的目录
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")//aar包的目录
+
+            // Self-explanatory metadata for the most part
+            pom {
+                name = PUBLISH_ARTIFACT_ID
+                description = ' This is the basic framework of bimromatic Android '
+                // If your project has a dedicated site, use its URL here
+                url = 'https://github.com/bimromatic'
+                licenses {
+                    license {
+                        //协议类型，一般默认Apache License2.0的话不用改：
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'bimromatic'
+                        name = 'bimromatic'
+                        email = '953364885@qq.com'
+                    }
+                }
+                // Version control info, if you're using GitHub, follow the format as seen here
+                scm {
+                    //修改成你的Git地址：
+                    connection = 'scm:git:github.com/bimromatic/MVVM_Practical.git'
+                    developerConnection = 'scm:git:ssh://github.com/bimromatic/MVVM_Practical.git'
+                    //分支地址：
+                    url = 'https://github.com/bimromatic/MVVM_Practical/tree/master'
+                }
+                // A slightly hacky fix so that your POM will include any transitive dependencies
+                // that your library builds upon
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+
+                    project.configurations.implementation.allDependencies.each {
+                        println "--- dependency ${it.group} ${it.name} ${it.version}"
+                        if(it.group != null && it.group.length() > 0){
+                            println "添加 dependency ${it.group} ${it.name} ${it.version}"
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        // The repository to publish to, Sonatype/MavenCentral
+        maven {
+            // This is an arbitrary name, you may also use "mavencentral" or
+            // any other name that's descriptive for you
+            name = "base_lib"
+
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            // You only need this if you want to publish snapshots, otherwise just set the URL
+            // to the release repo directly
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            // The username and password we've fetched earlier
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    // 设置对生成文件进行签名
+    sign publishing.publications
+}
+
+
+
+
